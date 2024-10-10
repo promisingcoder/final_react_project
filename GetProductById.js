@@ -1,10 +1,11 @@
 const { MongoClient, ServerApiVersion ,ObjectId} = require('mongodb');
 const {mongoose}  =  require("mongoose")
 const {Product}  = require("./ProductSchema")
-conn_string  = process.env.conn_string
-async function getItemById(conn_string,id){
+async function getItemById(conn,id){
     await mongoose.connect(conn) 
-    return Product.find({_id : ObjectId(id)})
+    result  = Product.find({_id : new ObjectId(id)})
+    console.log(result)
+    
 
 }
-export default getItemById;
+module.exports =  getItemById ;
