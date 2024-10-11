@@ -4,7 +4,7 @@ const {Product}  = require("./ProductSchema")
 async function getItemById(conn,id){
     await mongoose.connect(conn) 
     result  = Product.find({_id : new ObjectId(id)})
-    console.log(result)
+    return(result)
     
 
 }

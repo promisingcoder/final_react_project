@@ -14,10 +14,8 @@ app.get("/products", function (req, res) {
   result = GetProducts(conn_string).then((data) => res.send(data))
 });
 app.get('/products/:id', function(req, res) {
-  console.log(typeof req.params.id)
   
-  product =  GetProductById(conn_string,req.params.id);
-    res.send(product)
+  product =  GetProductById(conn_string,req.params.id).then((data) => res.send(data));
   
 });
 
