@@ -3,6 +3,8 @@ const {GetProducts} =  require("./GetProducts")
 const GetProductById = require("./GetProductById")
 var cors = require('cors')
 const bcrypt = require('bcrypt')
+const User = require('User');
+
 
 
 conn_string  = process.env.conn_string
@@ -17,6 +19,7 @@ const port = 3000;
 router.get("/products", function (req, res) {
   result = GetProducts(conn_string).then((data) => res.send(data))
 });
+
 router.get('/products/:id', function(req, res) {
   
   product =  GetProductById(conn_string,req.params.id).then((data) => res.send(data));
