@@ -36,9 +36,10 @@ const userSchemaFields = {
   };
 
 router.post('/register', async (req, res) => {
+    let items = {}
     for(item of userSchemaFields){
         if (Object.keys(req.body).indexOf(item) > -1) {
-            
+            items[item] = req.body[item]
 
          }
         else{
@@ -48,27 +49,10 @@ router.post('/register', async (req, res) => {
         }
 
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
-    userExists = !User.findOne({
-        username
-    })
-    emailExists = !User.findOne({
-        email
-    }) 
     
-    if (userExists && emailExists){
-        throw new Error("user and email  already exist")
-    }
-    if (userExists){
-        throw new Error("user already exists")
-    }
-    if (emailExists){
-        throw new Error("email already exists")
-    }
-    if(!userExists && !emailExists){
-    const user = new User({ username, password: hashedPassword });
+    
+    const user = new User({...items , password  : await bcrypt.hash(password, 10)});
     await user.save();
-    }
     
     } );
 module.exports = router
