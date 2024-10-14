@@ -57,12 +57,12 @@ router.post('/register', async (req, res) => {
        
         items.password = req.body["password"]
         items["passwordHash"] =  await bcrypt.hash(items.password, 10)
-        
+        conn =  process.env.conn_string
+        await mongoose.connect(conn)
+        const user = new User({...items});
+        await user.save();
     }
-    conn =  process.env.conn_string
-    await mongoose.connect(conn)
-    const user = new User({...items});
-    await user.save();
+    
     
     } )
 module.exports = router
