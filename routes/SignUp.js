@@ -37,13 +37,14 @@ const userSchemaFields = {
 
 router.post('/register', async (req, res) => {
     let items = {}
-    for(item of userSchemaFields){
+    for(item in userSchemaFields){
         if (Object.keys(req.body).indexOf(item) > -1) {
             items[item] = req.body[item]
 
          }
         else{
-            if (userSchemaFields.item.required == true){
+            
+            if (userSchemaFields[item].required == true){
                 throw new Error("item is required")
             }
         }
@@ -51,7 +52,7 @@ router.post('/register', async (req, res) => {
     }
     
     
-    const user = new User({...items , password  : await bcrypt.hash(password, 10)});
+    const user = new User({...items , passwordHash  : await bcrypt.hash(password, 10)});
     await user.save();
     
     } );
