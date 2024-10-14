@@ -1,17 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const User = require('UserSchema');
+const User = require('../models/UserSchema');
 const bcrypt = require('bcrypt');
-router.post('/register', async (err,req, res) => {
-    try {
-    const { username, password ,email } = req.body;
+router.post('/register', async (req, res) => {
+    console.log(req)
+    const { username, password ,email } =  req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    userExists = User.findOne({
+    userExists = !User.findOne({
         username
     })
-    emailExists = User.findOne({
+    emailExists = !User.findOne({
         email
-    })
+    }) 
+    
     if (userExists && emailExists){
         throw new Error("user and email  already exist")
     }
@@ -24,11 +25,6 @@ router.post('/register', async (err,req, res) => {
     if(!userExists && !emailExists){
     const user = new User({ username, password: hashedPassword });
     }
-
     await user.save();
-    res.status(201).json({ message: 'User registered successfully' });
-    } catch (error) {
-    res.status(500).json({ error: 'Registration failed' });
-    }
-    });
+    } );
 module.exports = router

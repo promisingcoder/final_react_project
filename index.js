@@ -1,16 +1,15 @@
 const express = require("express");
-const {GetProducts} =  require("./GetProducts")
 var cors = require('cors')
 const bcrypt = require('bcrypt')
-
-
+const registerRoute = require('./routes/SignUp');
 conn_string  = process.env.conn_string
 
 const app = express();
-const router =  express.Router()
 app.use(cors())
 app.use(express.json())
-app.use(router)
+app.post('/register', registerRoute);
+
+
 const port = 3000;
 
 

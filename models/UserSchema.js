@@ -39,7 +39,7 @@ const userSchema = new Schema({
         items: [cartItemSchema],
         totalAmount: { type: Number, default: 0 }
     }
-});
+},{collection  : "users"});
 
 const User = mongoose.model('User', userSchema);
 
