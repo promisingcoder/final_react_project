@@ -10,12 +10,13 @@ const addressSchema = new Schema({
 });
 
 const cartItemSchema = new Schema({
-    productID: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
+    productID: { tnype: Schema.Types.ObjectId, ref: 'Product', required: true },
     quantity: { type: Number, required: true }
 });
 
 const userSchema = new Schema({
     userID: { type: Schema.Types.ObjectId, auto: true },
+    userName : {type:String,required : true},
     name: {
         firstName: { type: String, required: true },
         lastName: { type: String, required: true }
