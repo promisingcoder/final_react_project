@@ -12,10 +12,13 @@ router.post('/register', async (err,req, res) => {
     emailExists = User.findOne({
         email
     })
+    if (userExists && emailExists){
+        throw new Error("user and email  already exist")
+    }
     if (userExists){
         throw new Error("user already exists")
     }
-    if (userExists){
+    if (emailExists){
         throw new Error("email already exists")
     }
     if(!userExists && !emailExists){
