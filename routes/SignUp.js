@@ -4,9 +4,15 @@ const User = require('UserSchema');
 const bcrypt = require('bcrypt');
 router.post('/register', async (err,req, res) => {
     try {
-    const { username, password } = req.body;
+    const { username, password ,email } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    if(!userExists){
+    userExists = User.findOne({
+        username
+    })
+    emailExists = User.findOne({
+        
+    })
+    if(!userExists && !emailExists){
     const user = new User({ username, password: hashedPassword });
     }
     else{
