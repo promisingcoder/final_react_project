@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/UserSchema');
 const bcrypt = require('bcrypt');
+const {mongoose}  =  require("mongoose")
 const userSchemaFields = {
     userID: { required: false },
     userName: { required: true },
@@ -38,22 +39,30 @@ const userSchemaFields = {
 router.post('/register', async (req, res) => {
     let items = {}
     for(item in userSchemaFields){
-        if (Object.keys(req.body).indexOf(item) > -1) {
+        if (Object.keys(req.body).indexOf(item) > -1)  {
             items[item] = req.body[item]
 
          }
+        
         else{
             
-            if (userSchemaFields[item].required == true){
+            if (userSchemaFields[item].required == true && item != "passwordHash"){
                 throw new Error("item is required")
             }
         }
 
     }
-    
-    
-    const user = new User({...items , passwordHash  : await bcrypt.hash(password, 10)});
+    console.log(Object.keys(req.body))
+    if (Object.keys(req.body).filter((item) => item == "password")){
+       
+        items.password = req.body["password"]
+        items["passwordHash"] =  await bcrypt.hash(items.password, 10)
+        
+    }
+    conn =  process.env.conn_string
+    await mongoose.connect(conn)
+    const user = new User({...items});
     await user.save();
     
-    } );
+    } )
 module.exports = router
