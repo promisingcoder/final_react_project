@@ -16,7 +16,7 @@ const cartItemSchema = new Schema({
 
 const userSchema = new Schema({
     userID: { type: Schema.Types.ObjectId, auto: true },
-    username : {type:String,required : true,unique : true},
+    username : {type:String,unique : true,required : true},
     name: {
         firstName: { type: String, required: true },
         lastName: { type: String, required: true }

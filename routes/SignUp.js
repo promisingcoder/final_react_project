@@ -47,7 +47,7 @@ router.post('/register', async (req, res) => {
         else{
             
             if (userSchemaFields[item].required == true && item != "passwordHash"){
-                throw new Error("item is required")
+                throw new Error(`${item} is required`)
             }
         }
 
