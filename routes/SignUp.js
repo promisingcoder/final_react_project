@@ -41,7 +41,6 @@ router.post('/register', async (req, res) => {
     for(item in userSchemaFields){
         if (Object.keys(req.body).indexOf(item) > -1)  {
             items[item] = req.body[item]
-
          }
         
         else{
