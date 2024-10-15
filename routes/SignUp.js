@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const {mongoose}  =  require("mongoose")
 const userSchemaFields = {
     userID: { required: false },
-    userName: { required: true },
+    username: { required: true },
     name: {
       firstName: { required: true },
       lastName: { required: true }
@@ -58,6 +58,7 @@ router.post('/register', async (req, res) => {
         items.password = req.body["password"]
         items["passwordHash"] =  await bcrypt.hash(items.password, 10)
         conn =  process.env.conn_string
+        console.log(items)
         await mongoose.connect(conn)
         const user = new User({...items});
         await user.save();

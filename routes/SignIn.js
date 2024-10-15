@@ -12,13 +12,13 @@ router.post('/login', async (req, res) => {
     conn =  process.env.conn_string
     await mongoose.connect(conn)
     const user = await User.findOne({ username });
+    
     if (!user) {
-        console.log("entered one")
-    return res.status(401).json({ error: 'Authentication failed' });
+        return res.status(401).json({ error: 'Authentication failed' });
     }
+    console.log(user.passwordHash)
     const passwordMatch = await bcrypt.compare(password, user.passwordHash);
     if (!passwordMatch) {
-        console.log("entered two")
     return res.status(401).json({ error: 'Authentication failed' });
     }
     const token = jwt.sign({ userId: user._id }, secret_key, {
@@ -26,7 +26,7 @@ router.post('/login', async (req, res) => {
     });
     res.status(200).json({ token });
     
-    res.status(500).json({ error: 'Login failed' });
+  //  res.status(500).json({ error: 'Login failed' });
     
     });
 module.exports = router
