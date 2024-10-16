@@ -10,4 +10,4 @@ async function AddAddress(AddressObj){
     return address
 
 }
-module.exports = {AddAddress}
+module.exports = AddAddress

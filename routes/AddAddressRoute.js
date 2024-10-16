@@ -5,7 +5,8 @@ router = express.Router()
  router.post('/AddToCart', verifyToken, (req, res) => {
     res.status(200).json({ message: 'Protected route accessed' });
     try {
-        AddAddress(...req.body.address)
+        console.log(req.body.address)
+        AddAddress(req.body.address)
     } catch (error) {
         console.log(`Error adding address :  ${error}`)
     }
