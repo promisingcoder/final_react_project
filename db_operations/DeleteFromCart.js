@@ -10,7 +10,7 @@ async function DeleteFromCart(userId, cartItems, conn) {
             const result = await User.findOneAndUpdate(
                 { _id: userId, "cart.items.productID": cartItem.productID }, 
                 {
-                    $inc: { "cart.items.$.quantity": -cartItem.quantity, "cart.totalAmount": -cartItem.price * cartItem.quantity }
+                    $inc: { "cart.items.$.quantity": (-cartItem.quantity), "cart.totalAmount": (-cartItem.price * cartItem.quantity) }
                 }
             );
 
