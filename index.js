@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const registerRoute = require('./routes/SignUp');
 const loginRoute = require('./routes/SignIn');
 const AddAddressRoute = require("./routes/AddAddressRoute")
+const AddToCartRoute = require("./routes/AddAddressRoute")
 conn_string  = process.env.conn_string
 
 const app = express();
@@ -11,7 +12,8 @@ app.use(cors())
 app.use(express.json())
 app.post('/register', registerRoute);
 app.post('/login',loginRoute)
-app.post("/AddToCart",AddAddressRoute);
+app.post("/AddAddress",AddAddressRoute);
+app.post("/AddToCart",AddToCartRoute)
 const port = 3001;
 
 
