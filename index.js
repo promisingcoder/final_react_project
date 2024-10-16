@@ -3,8 +3,7 @@ var cors = require('cors')
 const bcrypt = require('bcrypt')
 const registerRoute = require('./routes/SignUp');
 const loginRoute = require('./routes/SignIn');
-const verifyToken = require('./routes/authMiddleware');
-
+const AddAddressRoute = require("./routes/AddAddressRoute")
 conn_string  = process.env.conn_string
 
 const app = express();
@@ -12,9 +11,7 @@ app.use(cors())
 app.use(express.json())
 app.post('/register', registerRoute);
 app.post('/login',loginRoute)
-router.get('/cart', verifyToken, (req, res) => {
-  res.status(200).json({ message: 'Protected route accessed' });
-  });
+app.post("/AddToCart",AddAddressRoute);
 const port = 3001;
 
 

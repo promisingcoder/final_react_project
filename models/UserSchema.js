@@ -43,5 +43,6 @@ const userSchema = new Schema({
 },{collection  : "users"});
 
 const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+const Address = mongoose.model("Address",addressSchema)
+const CartItem = mongoose.model("CartItem",cartItemSchema)
+module.exports = {User,Address,CartItem};
