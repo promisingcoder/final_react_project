@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = require('../models/UserSchema');
+const {User} = require('../models/UserSchema');
 
 async function addToCart(userId, cartItem, itemPrice, conn) {
     try {

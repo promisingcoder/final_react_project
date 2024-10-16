@@ -8,7 +8,8 @@ try {
  req.userId = decoded.userId;
  next();
  } catch (error) {
- res.status(401).json({ error: 'Invalid token' });
+    console.log(`error :  ${error}`)
+    res.status(401).json({ error: 'Invalid token' });
  }
  };
 

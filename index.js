@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const registerRoute = require('./routes/SignUp');
 const loginRoute = require('./routes/SignIn');
 const AddAddressRoute = require("./routes/AddAddressRoute")
-const AddToCartRoute = require("./routes/AddAddressRoute")
+const AddToCartRoute = require("./routes/AddToCartRoute")
 conn_string  = process.env.conn_string
 
 const app = express();
