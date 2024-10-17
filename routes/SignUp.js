@@ -7,9 +7,8 @@ const {mongoose}  =  require("mongoose")
 router.post('/register', async (req, res) => {
     let items = {}
     
-        items.password = req.body["password"]
-        items["passwordHash"] =  await bcrypt.hash(items.password, 10)
-        delete items["password"]
+        
+        items["passwordHash"] =  await bcrypt.hash(req.body["password"], 10)
         conn =  process.env.conn_string
         console.log(items)
         await mongoose.connect(conn)
