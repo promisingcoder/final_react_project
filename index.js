@@ -5,9 +5,8 @@ const registerRoute = require('./routes/SignUp');
 const loginRoute = require('./routes/SignIn');
 const AddAddressRoute = require("./routes/AddAddressRoute")
 const AddToCartRoute = require("./routes/AddToCartRoute")
-const DeleteFromCartRoute = require("./routes/DeleteFromCartRoute")
-
-conn_string  = process.env.conn_string
+const DeleteFromCartRoute = require("./routes/DeleteFromCartRoute");
+const { GetProducts } = require("./db_operations/GetProducts");
 
 const app = express();
 app.use(cors())
@@ -17,7 +16,11 @@ app.post('/login',loginRoute)
 app.post("/AddAddress",AddAddressRoute);
 app.post("/AddToCart",AddToCartRoute)
 app.post("/DeleteFromCart",DeleteFromCartRoute)
-const port = 3001;
+app.get("/products",(req,res) => {
+  GetProducts(process.env.conn_string).then((data) => res.json(data))
+
+})
+const port = 3000;
 
 
 
