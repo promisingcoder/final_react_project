@@ -59,6 +59,7 @@ router.post('/register', async (req, res) => {
         conn =  process.env.conn_string
         console.log(items)
         await mongoose.connect(conn)
+        res.json({"res" : "worked"})
         const user = new User({...items});
         await user.save();
     }
