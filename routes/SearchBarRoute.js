@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { Product } = require("../models/ProductSchema");  // Assuming ProductSchema is set up correctly
+const { Product } = require("../models/ProductSchema"); 
 
 
 router.get("/search", async (req, res) => {
     try {
       const keyword = req.query.keyword;
   
-      const products = await Products.find({
+      const products = await Product.find({
         $or: [
           { name: { $regex: keyword, $options: "i" } },
           { description: { $regex: keyword, $options: "i" } },
