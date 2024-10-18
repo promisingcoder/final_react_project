@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');  // Assuming mongoose is required here
 const { Product } = require("../models/ProductSchema");  // Assuming ProductSchema is set up correctly
 
 
