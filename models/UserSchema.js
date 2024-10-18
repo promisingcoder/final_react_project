@@ -16,10 +16,10 @@ const cartItemSchema = new Schema({
 
 const userSchema = new Schema({
     userID: { type: Schema.Types.ObjectId, auto: true },
-    username : {type:String,unique : true,required : true},
+    username: { type: String, unique: true, required: true },
     name: {
-        firstName: { type: String, required: true },
-        lastName: { type: String, required: true }
+        firstName: { type: String }, // No longer required
+        lastName: { type: String }    // No longer required
     },
     email: { type: String, unique: true, required: true },
     passwordHash: { type: String, required: true },
@@ -32,15 +32,16 @@ const userSchema = new Schema({
     updatedAt: { type: Date, default: Date.now },
 
     contactInfo: {
-        phoneNumber: { type: String, required: true },
-        address: addressSchema
+        phoneNumber: { type: String }, // No longer required
+        address: addressSchema         // No longer required
     },
 
     cart: {
-        items: [cartItemSchema],
+        items: [cartItemSchema],       // No longer required
         totalAmount: { type: Number, default: 0 }
     }
-},{collection  : "users"});
+}, { collection: "users" });
+
 
 const User = mongoose.model('User', userSchema);
 const Address = mongoose.model("Address",addressSchema)

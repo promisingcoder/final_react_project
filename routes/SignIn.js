@@ -10,7 +10,7 @@ router.post('/login', async (req, res) => {
     
     const { username, password } = req.body;
     conn =  process.env.conn_string
-    await mongoose.connect(conn)
+    
     const user = await User.findOne({ username });
     
     if (!user) {
