@@ -32,7 +32,7 @@ app.get("/products",(req,res) => {
 
 })
 app.get("/latest",getLatestRoute)
-app.post("/search",searchRoute)
+app.get("/search",searchRoute)
 const port = 3000;
 
 
