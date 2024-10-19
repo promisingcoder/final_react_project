@@ -9,7 +9,7 @@ const DeleteFromCartRoute = require("./routes/DeleteFromCartRoute");
 const { GetProducts } = require("./db_operations/GetProducts");
 const {mongoose}  =  require("mongoose")
 const getLatestRoute =  require("./routes/LatestRoute")
-
+const searchRoute = require("./routes/SearchBarRoute")
 async function main(){
 const app = express();
 app.use(cors())
@@ -32,7 +32,7 @@ app.get("/products",(req,res) => {
 
 })
 app.get("/latest",getLatestRoute)
-
+app.post("/search",searchRoute)
 const port = 3000;
 
 
