@@ -9,6 +9,7 @@ const DeleteFromCartRoute = require("./routes/DeleteFromCartRoute");
 const { GetProducts } = require("./db_operations/GetProducts");
 const {mongoose}  =  require("mongoose")
 const getLatestRoute =  require("./routes/LatestRoute")
+
 async function main(){
 const app = express();
 app.use(cors())
