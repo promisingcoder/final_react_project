@@ -19,7 +19,7 @@ async function addToCart(userId, cartItems, conn) {
             // If the item doesn't exist in the cart, push it as a new item
             if (!result) {
                 await User.findByIdAndUpdate(
-                    userId, 
+                    ObjectId(userId), 
                     { 
                         $push: { "cart.items": cartItem }, 
                         $inc: { "cart.totalAmount": cartItem.price * cartItem.quantity } 
