@@ -4,7 +4,7 @@ const router =  express.Router()
 
 router.get('/products/:id', async function(req, res) {
   
-    product =  GetProductById(conn_string,req.params.id).then((data) => res.send(data));
+    product =  GetProductById(req.params.id).then((data) => res.send(data));
     
 });
 module.exports = router
