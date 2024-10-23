@@ -8,7 +8,7 @@ router = express.Router()
         const {productID } = req.body
         
         response  = await  addToCart(req.userId,productID)
-        res.send(response)
+        res.send("added successfully ")
     } catch (error) {
         console.log(`Error adding address :  ${error}`)
     }
