@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const {User} = require('../models/UserSchema');
 
-async function addToCart(userId, cartItems, conn) {
+async function addToCart(userId, cartItems) {
     try {
         // Connect to the database
-        await mongoose.connect(conn);
+        
 
         // Loop through each cart item to either update or add it
         for (let cartItem of cartItems) {
