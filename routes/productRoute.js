@@ -1,5 +1,5 @@
 const express = require("express");
-const GetProductById = require("./db_operations/GetProductById")
+const GetProductById = require("../db_operations/GetProductById")
 const router =  express.Router()
 
 router.get('/products/:id', function(req, res) {
