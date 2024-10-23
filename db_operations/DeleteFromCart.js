@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { User } = require('../models/UserSchema');
 
-async function DeleteFromCart(userId, productID) {
+async function DeleteFromCart(userId, productID,quantity) {
     const user = await User.findOne({ _id: userId });
     
     // Find the item in the cart
@@ -15,7 +15,7 @@ async function DeleteFromCart(userId, productID) {
             user.cart.items.splice(cartItemIndex, 1); // Remove the item from the cart
         } else {
             // If more than 1, decrement the quantity
-            cartItem.quantity -= 1;
+            cartItem.quantity -= quantity;
         }
     }
 
@@ -23,3 +23,4 @@ async function DeleteFromCart(userId, productID) {
     await user.save();
     return user.cart;
 }
+module.exports = DeleteFromCart
