@@ -1,31 +1,25 @@
 const mongoose = require('mongoose');
-const {User} = require('../models/UserSchema');
-const { Types: { ObjectId } } = require("mongoose");
+const { User } = require('../models/UserSchema');
 
-async function DeleteFromCart(userId, cartItems, conn) {
-    try {
-        // Connect to the database
-        await mongoose.connect(conn);
-
-        // Loop through each cart item to either update or add it
-        for (let cartItem of cartItems) {
-            const result = await User.findOneAndUpdate(
-                { _id: userId, "cart.items.productID": cartItem.productID }, 
-                {
-                    $inc: { "cart.items.$.quantity": (-cartItem.quantity), "cart.totalAmount": (-cartItem.price * cartItem.quantity) }
-                }
-            );
-
-            // If the item doesn't exist in the cart, push it as a new item
-            if (!result) {
-                return("item doesn't exist")
+async function DeleteFromCart(userId, productID) {
+    const user = await User.findOne({ _id: userId });
+    
+    // Find the item in the cart
+    const cartItemIndex = user.cart.items.findIndex(item => item.productID === productID);
+    
+    if (cartItemIndex !== -1) {
+        const cartItem = user.cart.items[cartItemIndex];
+        
+        if (cartItem.quantity === 1) {
+            // If the product quantity is 1, remove it from the cart
+            user.cart.items.splice(cartItemIndex, 1); // Remove the item from the cart
+        } else {
+            // If more than 1, decrement the quantity
+            cartItem.quantity -= 1;
         }
     }
-    } catch (error) {
-        console.error('Error adding to cart:', error);
-    } finally {
-        // Disconnect from the database
-        await mongoose.disconnect();
-    }
+
+    // Save the updated user document
+    await user.save();
+    return user.cart;
 }
-module.exports = DeleteFromCart
