@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const {User} = require('../models/UserSchema');
-const { Types: { ObjectId } } = require("mongoose");
 
 async function addToCart(userId, cartItems, conn) {
     try {
@@ -10,7 +9,7 @@ async function addToCart(userId, cartItems, conn) {
         // Loop through each cart item to either update or add it
         for (let cartItem of cartItems) {
             const result = await User.findOneAndUpdate(
-                { _id: ObjectId(userId), "cart.items.productID": cartItem.productID }, 
+                { _id: userId, "cart.items.productID": cartItem.productID }, 
                 {
                     $inc: { "cart.items.$.quantity": cartItem.quantity, "cart.totalAmount": cartItem.price * cartItem.quantity }
                 }
@@ -19,7 +18,7 @@ async function addToCart(userId, cartItems, conn) {
             // If the item doesn't exist in the cart, push it as a new item
             if (!result) {
                 await User.findByIdAndUpdate(
-                    ObjectId(userId), 
+                    userId, 
                     { 
                         $push: { "cart.items": cartItem }, 
                         $inc: { "cart.totalAmount": cartItem.price * cartItem.quantity } 
