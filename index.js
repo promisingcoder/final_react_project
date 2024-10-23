@@ -11,6 +11,7 @@ const {mongoose}  =  require("mongoose")
 const getLatestRoute =  require("./routes/LatestRoute")
 const searchRoute = require("./routes/SearchBarRoute")
 const cartRoute = require("./routes/DisplayCartRoute")
+const GetProductById = require("./routes/productRoute")
 async function main(){
 const app = express();
 app.use(cors())
@@ -32,6 +33,7 @@ app.get("/products",(req,res) => {
   GetProducts(process.env.conn_string).then((data) => res.json(data))
 
 })
+app.get("/products/:id",productRoute)
 app.get("/latest",getLatestRoute)
 app.get("/search",searchRoute)
 app.get("/cart" ,cartRoute)
