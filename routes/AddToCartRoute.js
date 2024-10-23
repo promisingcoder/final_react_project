@@ -5,9 +5,9 @@ router = express.Router()
 
  router.post('/AddToCart', verifyToken, async (req, res) => {
     try {
-        const {productID } = req.body
+        const {productID ,quantity } = req.body
         
-        response  = await  addToCart(req.userId,productID)
+        response  = await  addToCart(req.userId,productID,quantity)
         res.send("added successfully ")
     } catch (error) {
         console.log(`Error adding address :  ${error}`)
