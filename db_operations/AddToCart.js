@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const {User} = require('../models/UserSchema');
 const Product = require("../models/ProductSchema")
-async function addToCart(userId, productID,quantity) {
+async function addToCart(userId, productID,quantity,totalAmount) {
     const user = await User.findOne({ _id: userId });
     
     // Find the item in the cart
@@ -12,7 +12,7 @@ async function addToCart(userId, productID,quantity) {
         cartItem.quantity += quantity; // Or set to the desired amount
     } else {
         // If the product does not exist, add it to the cart
-        user.cart.items.push({ productID: productID, quantity: quantity }); // Set initial quantity to 1
+        user.cart.items.push({ productID: productID, quantity: quantity,totalAmount : totalAmount }); // Set initial quantity to 1
     }
 
     // Save the updated user document
