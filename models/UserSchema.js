@@ -38,8 +38,7 @@ const userSchema = new Schema({
 
     cart: {
         items: [cartItemSchema],       // No longer required
-        totalAmount: { type: Number, default: 0 }
-    }
+            }
 }, { collection: "users" });
 
 

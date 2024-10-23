@@ -3,12 +3,12 @@ const {addToCart} = require("../db_operations/AddToCart")
 const verifyToken = require('./authMiddleware');
 router = express.Router()
 
- router.post('/AddToCart', verifyToken, (req, res) => {
-    res.status(200).json({ message: 'Protected route accessed' });
+ router.post('/AddToCart', verifyToken, async (req, res) => {
     try {
-        const {cartItems } = req.body
+        const {productID } = req.body
         
-        addToCart(req.userId,cartItems,process.env.conn_string)
+        response  = await  addToCart(req.userId,productID)
+        res.send(response)
     } catch (error) {
         console.log(`Error adding address :  ${error}`)
     }

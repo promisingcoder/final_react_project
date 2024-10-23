@@ -1,38 +1,24 @@
 const mongoose = require('mongoose');
 const {User} = require('../models/UserSchema');
-
-async function addToCart(userId, cartItems) {
-    try {
-        // Connect to the database
-        
-
-        // Loop through each cart item to either update or add it
-        for (let cartItem of cartItems) {
-            const result = await User.findOneAndUpdate(
-                { _id: ObjectId(userId), "cart.items.productID": cartItem.productID }, 
-                {
-                    $inc: { "cart.items.$.quantity": cartItem.quantity, "cart.totalAmount": cartItem.price * cartItem.quantity }
-                }
-            );
-
-            // If the item doesn't exist in the cart, push it as a new item
-            if (!result) {
-                await User.findByIdAndUpdate(
-                    userId, 
-                    { 
-                        $push: { "cart.items": cartItem }, 
-                        $inc: { "cart.totalAmount": cartItem.price * cartItem.quantity } 
-                    }
-                );
-            }
-        }
-
-    } catch (error) {
-        console.error('Error adding to cart:', error);
-    } finally {
-        // Disconnect from the database
-        await mongoose.disconnect();
+const Product = require("../models/ProductSchema")
+async function addToCart(userId, productID) {
+    const user = await User.findOne({ _id: userId });
+    
+    // Find the item in the cart
+    const cartItem = user.cart.items.find(item => item.productID === productID);
+    
+    if (cartItem) {
+        // If the product exists, increment the quantity
+        cartItem.quantity += 1; // Or set to the desired amount
+    } else {
+        // If the product does not exist, add it to the cart
+        user.cart.items.push({ productID: productID, quantity: 1 }); // Set initial quantity to 1
     }
+
+    // Save the updated user document
+    await user.save();
+    return(user.cart)
 }
+
 
 module.exports = { addToCart };
