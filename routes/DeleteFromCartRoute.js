@@ -1,5 +1,4 @@
 const express = require("express");
-const {addToCart} = require("../db_operations/DeleteFromCart")
 const verifyToken = require('./authMiddleware');
 const DeleteFromCart = require("../db_operations/DeleteFromCart");
 router = express.Router()

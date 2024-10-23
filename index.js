@@ -10,6 +10,7 @@ const { GetProducts } = require("./db_operations/GetProducts");
 const {mongoose}  =  require("mongoose")
 const getLatestRoute =  require("./routes/LatestRoute")
 const searchRoute = require("./routes/SearchBarRoute")
+const cartRoute = require("./routes/DisplayCartRoute")
 async function main(){
 const app = express();
 app.use(cors())
@@ -33,6 +34,7 @@ app.get("/products",(req,res) => {
 })
 app.get("/latest",getLatestRoute)
 app.get("/search",searchRoute)
+app.get("/cart" ,cartRoute)
 const port = 3000;
 
 
