@@ -1,4 +1,3 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
 const { Schema, model } = require("mongoose");
 
 const productSchema = new Schema({

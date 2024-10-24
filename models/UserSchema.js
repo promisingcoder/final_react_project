@@ -18,8 +18,8 @@ const userSchema = new Schema({
     userID: { type: Schema.Types.ObjectId, auto: true },
     username: { type: String, unique: true, required: true },
     name: {
-        firstName: { type: String }, // No longer required
-        lastName: { type: String }    // No longer required
+        firstName: { type: String }, 
+        lastName: { type: String }    
     },
     email: { type: String, unique: true, required: true },
     passwordHash: { type: String, required: true },
@@ -32,12 +32,12 @@ const userSchema = new Schema({
     updatedAt: { type: Date, default: Date.now },
 
     contactInfo: {
-        phoneNumber: { type: String }, // No longer required
-        address: addressSchema         // No longer required
+        phoneNumber: { type: String }, 
+        address: addressSchema        
     },
 
     cart: {
-        items: [cartItemSchema],       // No longer required
+        items: [cartItemSchema],      
         totalAmount: { type: Number, default: 0 }
     }
 }, { collection: "users" });

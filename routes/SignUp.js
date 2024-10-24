@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const {User} = require('../models/UserSchema');
 const bcrypt = require('bcrypt');
-const {mongoose}  =  require("mongoose")
 
 router.post('/register', async (req, res) => {
     const { username, email, password } = req.body;

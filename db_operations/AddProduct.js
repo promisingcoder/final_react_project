@@ -1,4 +1,3 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
  const {Product}  = require('./ProductSchema');
 const {mongoose}  =  require("mongoose")
 

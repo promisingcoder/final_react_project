@@ -3,7 +3,6 @@ const router = express.Router();
 const {User} = require('../models/UserSchema');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
 
 router.post('/login', async (req, res) => {
     const secret_key = process.env.secret_key
